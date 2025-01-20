@@ -55,6 +55,13 @@ export default function Footer() {
           <h2 className="text-center text-blue-900 text-3xl font-bold">
             Recommended Resources
           </h2>
+          <a
+            href="mailto:15minuteemailservice@gmail.com"
+            className="mt-4 flex items-center text-blue-600 hover:text-blue-700 space-x-2"
+          >
+            <Mail className="w-4 h-4" />
+            <span>15minuteemailservice@gmail.com</span>
+          </a>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {affiliateLinks.map((link) => (
