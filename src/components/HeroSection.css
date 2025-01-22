@@ -17,8 +17,8 @@
 
 /* Timer Display */
 .timer-display {
-  @apply text-6xl md:text-7xl font-bold text-white text-center my-8 
-    transition-all duration-300;
+  @apply text-6xl md:text-7xl font-bold text-black text-center my-8 
+    transition-all duration-300; /* Changed text color to black */
 }
 
 .timer-display.warning {
@@ -31,8 +31,8 @@
 
 /* Email Container */
 .email-container {
-  @apply bg-white/20 backdrop-blur-sm rounded-lg p-4 mt-4 text-white 
-    transition-all duration-200;
+  @apply bg-white/20 backdrop-blur-sm rounded-lg p-4 mt-4 text-black 
+    transition-all duration-200; /* Changed text color to black for visibility */
 }
 
 .email-container:hover {
