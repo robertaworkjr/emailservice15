@@ -7,9 +7,9 @@ class EmailError extends Error {
 }
 
 export function validateEmail(email) {
-  const regex = /^[a-z0-9]+@15min\.mail$/;
+  const regex = /^[a-z0-9]+@15minuteemailservice\.gmail\.com$/; // Updated regex
   if (!regex.test(email)) {
-    throw new EmailError('Invalid temporary email format');
+    throw new EmailError('Invalid email format');
   }
   return true;
 }
