@@ -14,28 +14,9 @@ export function validateEmail(email) {
   return true;
 }
 
-function generateRandomString(length) {
-  try {
-    const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
-    const array = new Uint8Array(length);
-    crypto.getRandomValues(array);
-    return Array.from(array)
-      .map(x => characters[x % characters.length])
-      .join('');
-  } catch (error) {
-    console.error('Secure random generation failed, falling back to Math.random');
-    const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-    return result;
-  }
-}
-
 export function generateEmail() {
-  const username = generateRandomString(8);
-  const email = `${username}@15min.mail`;
+  // Directly return the communication email
+  const email = '15minuteemailservice@gmail.com';
   validateEmail(email);
   return email;
 }
