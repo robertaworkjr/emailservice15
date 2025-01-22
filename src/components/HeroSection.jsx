@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Mail } from 'lucide-react';
+import { Mail, DollarSign } from 'lucide-react'; // Importing the crypto icon
 import TimerDisplay from './TimerDisplay.jsx';
 import EmailActions from './EmailActions.jsx';
 import Inbox from './Inbox.jsx';
@@ -63,6 +63,7 @@ export default function HeroSection() {
   const startTimer = useCallback(() => {
     try {
       const newEmail = generateEmail();
+      console.log('Generated Email:', newEmail); // Added console log
       setEmail(newEmail);
       setIsActive(true);
       setError(null);
@@ -118,49 +119,39 @@ export default function HeroSection() {
               <h3 className="text-xl font-semibold text-white text-center">Recommended Tools</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <a
-                  href="https://www.namecheap.com/domains/registration/bulk/"
+                  href="https://325385rjsoqns83nw7mm2d-h8a.hop.clickbank.net/?&traffic_source=google&traffic_type=Website&campaign=spring&creative=website"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-white/10 hover:bg-white/20 transition-colors p-4 rounded-lg flex items-center space-x-4"
                 >
-                  <img 
-                    src="https://www.namecheap.com/assets/img/nc-icon/favicon.ico"
-                    alt="Namecheap"
-                    className="w-8 h-8"
-                  />
+                  <DollarSign className="w-8 h-8 text-white" /> {/* Crypto icon */}
                   <div>
-                    <p className="text-white font-medium">Namecheap Domains</p>
-                    <p className="text-white/80 text-sm">Register domains at low prices</p>
+                    <p className="text-white font-medium">Crypto Services</p>
+                    <p className="text-white/80 text-sm">Explore various crypto services</p>
                   </div>
                 </a>
                 <a
-                  href="https://www.hostinger.com/web-hosting"
+                  href="https://d5b422qmptsnmy8dxtsf305s6t.hop.clickbank.net/?&traffic_source=google&traffic_type=native&campaign=spring&creative=website"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-white/10 hover:bg-white/20 transition-colors p-4 rounded-lg flex items-center space-x-4"
                 >
-                  <img 
-                    src="https://www.hostinger.com/assets/images/icons/favicon-32x32.png"
-                    alt="Hostinger"
-                    className="w-8 h-8"
-                  />
-                  <div>
-                    <p className="text-white font-medium">Hostinger Hosting</p>
-                    <p className="text-white/80 text-sm">Affordable web hosting solutions</p>
-                  </div>
-                </a>
-                <a
-                  href="https://44d2b6unmtqmrb3lyj0gad9weu.hop.clickbank.net/?&traffic_source=google&traffic_type=click&campaign=spring&creative=video"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-white/10 hover:bg-white/20 transition-colors p-4 rounded-lg flex items-center space-x-4"
-                >
-                  <div className="bg-green-500 rounded-full w-8 h-8 flex items-center justify-center">
-                    <span className="text-white text-xl font-bold">$</span>
-                  </div>
+                  <DollarSign className="w-8 h-8 text-white" /> {/* Crypto icon */}
                   <div>
                     <p className="text-white font-medium">Spring Marketing</p>
                     <p className="text-white/80 text-sm">Boost your online income</p>
+                  </div>
+                </a>
+                <a
+                  href="https://16c706wakjvbx01xxekd7s7v88.hop.clickbank.net/?&traffic_source=google&traffic_type=webinar&creative=video"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white/10 hover:bg-white/20 transition-colors p-4 rounded-lg flex items-center space-x-4"
+                >
+                  <DollarSign className="w-8 h-8 text-white" /> {/* Crypto icon */}
+                  <div>
+                    <p className="text-white font-medium">Webinar Services</p>
+                    <p className="text-white/80 text-sm">Join our informative webinars</p>
                   </div>
                 </a>
               </div>

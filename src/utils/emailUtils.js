@@ -7,16 +7,21 @@ class EmailError extends Error {
 }
 
 export function validateEmail(email) {
-  const regex = /^[a-z0-9]+@15minuteemailservice\.gmail\.com$/; // Updated regex
-  if (!regex.test(email)) {
+  console.log('Validating email:', email); // Debugging log
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Updated regex
+  const isValid = emailRegex.test(email);
+  console.log('Is email valid:', isValid); // Debugging log
+  if (!isValid) {
+    console.error('Invalid email format:', email); // Debugging log
     throw new EmailError('Invalid email format');
   }
   return true;
 }
 
 export function generateEmail() {
-  // Directly return the communication email
-  const email = '15minuteemailservice@gmail.com';
+  // Generate a random username
+  const username = Math.random().toString(36).substring(2, 10); // Random string
+  const email = `${username}@15min.mail`;
   validateEmail(email);
   return email;
 }

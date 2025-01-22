@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Timer } from 'lucide-react';
 
-export default function TimerDisplay({ minutes, seconds }) {
+export default function TimerDisplay({ minutes = 0, seconds = 0 }) {
   // Input validation
   const validMinutes = Math.max(0, Math.min(59, parseInt(minutes) || 0));
   const validSeconds = Math.max(0, Math.min(59, parseInt(seconds) || 0));
@@ -25,11 +25,6 @@ export default function TimerDisplay({ minutes, seconds }) {
 }
 
 TimerDisplay.propTypes = {
-  minutes: PropTypes.number.isRequired,
-  seconds: PropTypes.number.isRequired
-};
-
-TimerDisplay.defaultProps = {
-  minutes: 0,
-  seconds: 0
+  minutes: PropTypes.number,
+  seconds: PropTypes.number
 };

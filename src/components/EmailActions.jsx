@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { Copy, Check, Inbox } from 'lucide-react';
 
 export default function EmailActions({ 
-  email, 
-  copied, 
+  email = '', 
+  copied = false, 
   copyToClipboard, 
   setShowInbox, 
   showInbox 
@@ -83,10 +83,4 @@ EmailActions.propTypes = {
   copyToClipboard: PropTypes.func.isRequired,
   setShowInbox: PropTypes.func.isRequired,
   showInbox: PropTypes.bool.isRequired
-};
-
-EmailActions.defaultProps = {
-  email: '',
-  copied: false,
-  showInbox: false
 };
