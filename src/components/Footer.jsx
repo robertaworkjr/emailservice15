@@ -51,13 +51,13 @@ export default function Footer() {
     <footer className="w-full bg-gradient-to-b from-blue-50 to-blue-100 mt-8">
       <div className="max-w-6xl mx-auto px-4 py-12">
         <div className="flex flex-col items-center mb-12">
-          <Mail className="w-16 h-16 text-blue-600 mb-4" />
-          <h2 className="text-center text-blue-900 text-3xl font-bold">
+          <Mail className="w-16 h-16 text-black mb-4" />
+          <h2 className="text-center text-black text-3xl font-bold">
             Recommended Resources
           </h2>
           <a
             href="mailto:15minuteemailservice@gmail.com"
-            className="mt-4 flex items-center text-blue-600 hover:text-blue-700 space-x-2"
+            className="mt-4 flex items-center text-black hover:text-gray-700 space-x-2"
           >
             <Mail className="w-4 h-4" />
             <span>15minuteemailservice@gmail.com</span>
@@ -80,10 +80,10 @@ export default function Footer() {
                   className: "w-6 h-6 text-white" 
                 })}
               </div>
-              <h3 className="text-blue-900 font-semibold text-lg mb-3 text-center">
+              <h3 className="text-black font-semibold text-lg mb-3 text-center">
                 {link.title}
               </h3>
-              <div className="flex items-center text-blue-600 hover:text-blue-700 text-sm font-medium">
+              <div className="flex items-center text-black hover:text-gray-700 text-sm font-medium">
                 <span>Learn More</span>
                 <ExternalLink className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </div>
@@ -91,10 +91,10 @@ export default function Footer() {
           ))}
         </div>
         <div className="text-center mt-16 space-y-4 border-t border-blue-200 pt-12">
-          <p className="text-blue-700 text-sm font-medium">
+          <p className="text-black text-sm font-medium">
             Affiliate Disclosure: Some links above are sponsored
           </p>
-          <p className="text-blue-600 text-sm">
+          <p className="text-black text-sm">
             © {new Date().getFullYear()} 15-Minute Email Service
           </p>
         </div>

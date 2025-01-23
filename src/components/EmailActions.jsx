@@ -29,15 +29,15 @@ export default function EmailActions({
     <div className="mt-6 space-y-4">
       <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4 relative">
         <div className="flex items-center justify-between">
-          <span className="text-white font-mono break-all text-sm md:text-base">
+          <span className="text-black font-mono break-all text-sm md:text-base">
             {email}
           </span>
           <button
             onClick={handleCopy}
             className={`ml-4 p-2 ${
               copyError ? 'bg-red-500' : 'bg-white/20 hover:bg-white/30'
-            } rounded-lg transition-all duration-200 text-white focus:outline-none 
-            focus:ring-2 focus:ring-white/50`}
+            } rounded-lg transition-all duration-200 text-black focus:outline-none 
+            focus:ring-2 focus:ring-black/50`}
             title="Copy email address"
             aria-label="Copy email address"
             disabled={copied}
@@ -65,8 +65,8 @@ export default function EmailActions({
       <button
         onClick={() => setShowInbox(!showInbox)}
         className="w-full flex items-center justify-center gap-2 px-4 py-3 
-          bg-white/20 hover:bg-white/30 rounded-lg text-white transition-all 
-          duration-200 focus:outline-none focus:ring-2 focus:ring-white/50"
+          bg-white/20 hover:bg-white/30 rounded-lg text-black transition-all 
+          duration-200 focus:outline-none focus:ring-2 focus:ring-black/50"
         aria-label={showInbox ? 'Hide Inbox' : 'Show Inbox'}
         aria-expanded={showInbox}
       >

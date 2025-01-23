@@ -1,6 +1,6 @@
 /* Button Styles */
 .btn-primary {
-  @apply px-6 py-3 bg-white text-indigo-600 font-semibold rounded-lg shadow-md
+  @apply px-6 py-3 bg-white text-black font-semibold rounded-lg shadow-md
     hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-indigo-400 
     focus:ring-offset-2 transition-all duration-200 ease-in-out transform 
     hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed
@@ -8,7 +8,7 @@
 }
 
 .btn-secondary {
-  @apply px-6 py-3 bg-red-500 text-white font-semibold rounded-lg shadow-md
+  @apply px-6 py-3 bg-red-500 text-black font-semibold rounded-lg shadow-md
     hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 
     focus:ring-offset-2 transition-all duration-200 ease-in-out transform 
     hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed
@@ -18,7 +18,7 @@
 /* Timer Display */
 .timer-display {
   @apply text-6xl md:text-7xl font-bold text-black text-center my-8 
-    transition-all duration-300; /* Changed text color to black */
+    bg-gray-200 transition-all duration-300;
 }
 
 .timer-display.warning {
@@ -31,8 +31,8 @@
 
 /* Email Container */
 .email-container {
-  @apply bg-white/20 backdrop-blur-sm rounded-lg p-4 mt-4 text-black 
-    transition-all duration-200; /* Changed text color to black for visibility */
+  @apply bg-gray-200 backdrop-blur-sm rounded-lg p-4 mt-4 text-black 
+    transition-all duration-200;
 }
 
 .email-container:hover {
@@ -41,8 +41,8 @@
 
 /* Inbox Styles */
 .inbox-container {
-  @apply mt-6 bg-white/20 backdrop-blur-sm rounded-lg p-4 text-black 
-    transition-all duration-200; /* Changed text color to black for visibility */
+  @apply mt-6 bg-gray-200 backdrop-blur-sm rounded-lg p-4 text-black 
+    transition-all duration-200;
 }
 
 /* Animation for copy feedback */

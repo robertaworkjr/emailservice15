@@ -19,9 +19,9 @@ export default function EmailList({ emails, setSelectedEmail, loading }) {
   return (
     <div className="space-y-2" role="list">
       {emails.length === 0 ? (
-        <div className="text-white text-center py-8">
+        <div className="text-black text-center py-8">
           <p className="text-lg">No emails yet</p>
-          <p className="text-sm text-white/70 mt-2">
+          <p className="text-sm text-black/70 mt-2">
             New emails will appear here when received
           </p>
         </div>
