@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Mail, DollarSign } from 'lucide-react'; // Importing the crypto icon
+import { Mail, DollarSign, AlertCircle } from 'lucide-react';
 import TimerDisplay from './TimerDisplay.jsx';
 import EmailActions from './EmailActions.jsx';
 import Inbox from './Inbox.jsx';
@@ -29,26 +29,41 @@ export default function HeroSection() {
           setSeconds(prev => prev - 1);
         }
       }, 1000);
-    } else if (minutes === 0 && seconds === 0) {
+    } else if (minutes === 0 && seconds === 0 && isActive) {
       handleExpiration();
     }
     return () => clearInterval(interval);
   }, [isActive, minutes, seconds]);
 
-  // Mock email generation effect
+  // Mock email generation effect - more realistic timing
   useEffect(() => {
     if (showInbox && isActive) {
+      // Generate initial email after 2 seconds
+      const initialTimeout = setTimeout(() => {
+        try {
+          const welcomeEmail = generateMockEmail();
+          setEmails([welcomeEmail]);
+        } catch (error) {
+          console.error('Failed to generate initial email:', error);
+        }
+      }, 2000);
+
+      // Generate random emails periodically
       const emailInterval = setInterval(() => {
-        if (Math.random() < 0.3) { // 30% chance to receive email
+        if (Math.random() < 0.4) { // 40% chance to receive email
           try {
             const newEmail = generateMockEmail();
-            setEmails(prev => [newEmail, ...prev]);
+            setEmails(prev => [newEmail, ...prev.slice(0, 9)]); // Keep max 10 emails
           } catch (error) {
             console.error('Failed to generate mock email:', error);
           }
         }
-      }, 5000);
-      return () => clearInterval(emailInterval);
+      }, 8000); // Every 8 seconds
+
+      return () => {
+        clearTimeout(initialTimeout);
+        clearInterval(emailInterval);
+      };
     }
   }, [showInbox, isActive]);
 
@@ -58,15 +73,20 @@ export default function HeroSection() {
     setShowInbox(false);
     setEmails([]);
     setSelectedEmail(null);
+    setError(null);
   }, []);
 
   const startTimer = useCallback(() => {
     try {
       const newEmail = generateEmail();
-      console.log('Generated Email:', newEmail); // Added console log
+      console.log('Generated Email:', newEmail);
       setEmail(newEmail);
       setIsActive(true);
+      setMinutes(15);
+      setSeconds(0);
       setError(null);
+      setEmails([]); // Clear previous emails
+      setSelectedEmail(null);
     } catch (error) {
       setError('Failed to generate email address');
       console.error('Start timer error:', error);
@@ -115,6 +135,18 @@ export default function HeroSection() {
               Use it to sign up for services, verify accounts, or test features without
               exposing your real email address.
             </p>
+            
+            {/* Demo Notice */}
+            <div className="bg-yellow-500/20 border border-yellow-500/40 rounded-lg p-4 mt-4 max-w-2xl">
+              <div className="flex items-start space-x-3">
+                <AlertCircle className="w-5 h-5 text-yellow-300 mt-0.5 flex-shrink-0" />
+                <div className="text-yellow-100 text-sm">
+                  <p className="font-medium mb-1">Demo Mode</p>
+                  <p>This is a demonstration. Generated emails are simulated and cannot receive real messages. For a fully functional temporary email service, backend infrastructure would be required.</p>
+                </div>
+              </div>
+            </div>
+
             <div className="mt-6 space-y-4">
               <h3 className="text-xl font-semibold text-white text-center">Recommended Tools</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -124,7 +156,7 @@ export default function HeroSection() {
                   rel="noopener noreferrer"
                   className="bg-white/10 hover:bg-white/20 transition-colors p-4 rounded-lg flex items-center space-x-4"
                 >
-                  <DollarSign className="w-8 h-8 text-white" /> {/* Crypto icon */}
+                  <DollarSign className="w-8 h-8 text-white" />
                   <div>
                     <p className="text-white font-medium">Crypto Services</p>
                     <p className="text-white/80 text-sm">Explore various crypto services</p>
@@ -136,19 +168,19 @@ export default function HeroSection() {
                   rel="noopener noreferrer"
                   className="bg-white/10 hover:bg-white/20 transition-colors p-4 rounded-lg flex items-center space-x-4"
                 >
-                  <DollarSign className="w-8 h-8 text-white" /> {/* Crypto icon */}
+                  <DollarSign className="w-8 h-8 text-white" />
                   <div>
                     <p className="text-white font-medium">Spring Marketing</p>
                     <p className="text-white/80 text-sm">Boost your online income</p>
                   </div>
                 </a>
                 <a
-                  href="https://16c706wakjvbx01xxekd7s7v88.hop.clickbank.net/?&traffic_source=google&traffic_type=webinar&creative=video"
+                  href="https://16c706wakjvbx01xxekd7v88.hop.clickbank.net/?&traffic_source=google&traffic_type=webinar&creative=video"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-white/10 hover:bg-white/20 transition-colors p-4 rounded-lg flex items-center space-x-4"
                 >
-                  <DollarSign className="w-8 h-8 text-white" /> {/* Crypto icon */}
+                  <DollarSign className="w-8 h-8 text-white" />
                   <div>
                     <p className="text-white font-medium">Webinar Services</p>
                     <p className="text-white/80 text-sm">Join our informative webinars</p>
@@ -166,13 +198,15 @@ export default function HeroSection() {
 
           <TimerDisplay minutes={minutes} seconds={seconds} />
           
-          <EmailActions
-            email={email}
-            copied={copied}
-            copyToClipboard={copyToClipboard}
-            setShowInbox={setShowInbox}
-            showInbox={showInbox}
-          />
+          {email && (
+            <EmailActions
+              email={email}
+              copied={copied}
+              copyToClipboard={copyToClipboard}
+              setShowInbox={setShowInbox}
+              showInbox={showInbox}
+            />
+          )}
           
           {showInbox && (
             <Inbox
@@ -192,7 +226,7 @@ export default function HeroSection() {
                 className="btn-primary"
                 aria-label="Start 15 minute timer"
               >
-                Start
+                Generate Email & Start Timer
               </button>
             ) : (
               <button
