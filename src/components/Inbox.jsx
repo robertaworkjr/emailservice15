@@ -3,16 +3,51 @@ import PropTypes from 'prop-types';
 import { RefreshCw } from 'lucide-react';
 import EmailList from './EmailList.jsx';
 import SelectedEmail from './SelectedEmail.jsx';
+import { generateMockEmail } from '../utils/emailUtils.js';
 
 export default function Inbox({ 
   emails, 
   selectedEmail, 
   setSelectedEmail, 
   refreshing, 
-  setRefreshing 
+  setRefreshing,
+  onRefresh,
+  isBackendMode = false
 }) {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Demo mode email generation
+  useEffect(() => {
+    if (!isBackendMode && emails.length === 0) {
+      // Generate initial demo email after 2 seconds
+      const initialTimeout = setTimeout(() => {
+        try {
+          const welcomeEmail = generateMockEmail();
+          setEmails([welcomeEmail]);
+        } catch (error) {
+          console.error('Failed to generate initial demo email:', error);
+        }
+      }, 2000);
+
+      // Generate random demo emails periodically
+      const emailInterval = setInterval(() => {
+        if (Math.random() < 0.4) { // 40% chance
+          try {
+            const newEmail = generateMockEmail();
+            setEmails(prev => [newEmail, ...prev.slice(0, 9)]); // Keep max 10 emails
+          } catch (error) {
+            console.error('Failed to generate demo email:', error);
+          }
+        }
+      }, 8000);
+
+      return () => {
+        clearTimeout(initialTimeout);
+        clearInterval(emailInterval);
+      };
+    }
+  }, [isBackendMode, emails.length]);
 
   useEffect(() => {
     let timeoutId;
@@ -30,12 +65,20 @@ export default function Inbox({
     try {
       setError(null);
       setRefreshing(true);
-      // Simulated refresh logic happens in HeroSection's email generation effect
+      
+      if (isBackendMode && onRefresh) {
+        onRefresh();
+      } else {
+        // Demo mode - just simulate refresh
+        setTimeout(() => {
+          setRefreshing(false);
+        }, 1000);
+      }
     } catch (err) {
       setError('Failed to refresh inbox');
       console.error('Refresh error:', err);
     }
-  }, [setRefreshing]);
+  }, [setRefreshing, isBackendMode, onRefresh]);
 
   // Clear selection when emails change
   useEffect(() => {
@@ -47,7 +90,9 @@ export default function Inbox({
   return (
     <div className="mt-8 bg-white/10 backdrop-blur-sm rounded-xl p-6">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-semibold text-black">Inbox</h2>
+        <h2 className="text-xl font-semibold text-black">
+          Inbox {isBackendMode ? '(Live)' : '(Demo)'}
+        </h2>
         <button
           onClick={refreshInbox}
           disabled={refreshing}
@@ -106,10 +151,7 @@ Inbox.propTypes = {
   selectedEmail: PropTypes.object,
   setSelectedEmail: PropTypes.func.isRequired,
   refreshing: PropTypes.bool.isRequired,
-  setRefreshing: PropTypes.func.isRequired
-};
-
-Inbox.defaultProps = {
-  emails: [],
-  refreshing: false
+  setRefreshing: PropTypes.func.isRequired,
+  onRefresh: PropTypes.func,
+  isBackendMode: PropTypes.bool
 };
