@@ -56,3 +56,5 @@ export const sanitizeInput = (req, res, next) => {
 };
 
 export { rateLimiterMiddleware as rateLimiter };
+
+export { rateLimiter }
